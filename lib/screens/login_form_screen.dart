@@ -9,17 +9,20 @@ class LoginFormScreen extends StatefulWidget {
 }
 
 class _LoginFormScreenState extends State<LoginFormScreen> {
+  // Form key and controllers for managing form state
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
 
   @override
   void dispose() {
+    // Dispose controllers to avoid memory leaks
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
     super.dispose();
   }
 
+  // Email validation logic
   String? _validateEmail(String? value) {
     final v = value?.trim() ?? '';
     if (v.isEmpty) return 'Email can’t be empty';
@@ -27,12 +30,14 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     return null;
   }
 
+  // Password validation logic
   String? _validatePassword(String? value) {
     final v = value ?? '';
     if (v.length < 6) return 'Password must be at least 6 characters';
     return null;
   }
 
+  // Handles form submission
   void _submit() {
     final ok = _formKey.currentState?.validate() ?? false;
     if (ok) {
@@ -52,6 +57,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
+              // Email input field
               TextFormField(
                 controller: _emailCtrl,
                 keyboardType: TextInputType.emailAddress,
@@ -62,6 +68,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 validator: _validateEmail,
               ),
               const SizedBox(height: 12),
+              // Password input field
               TextFormField(
                 controller: _passwordCtrl,
                 obscureText: true,
@@ -72,6 +79,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 validator: _validatePassword,
               ),
               const SizedBox(height: 20),
+              // Submit button
               ElevatedButton(onPressed: _submit, child: const Text('Submit')),
             ],
           ),

@@ -11,12 +11,15 @@ class UsersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Users')),
       body: FutureBuilder<List<User>>(
+        // Fetch users asynchronously
         future: ApiService.fetchUsers(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
+            // Show loading indicator while waiting
             return const Center(child: CircularProgressIndicator());
           }
           if (snap.hasError) {
+            // Display error message if fetch fails
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -28,6 +31,7 @@ class UsersScreen extends StatelessWidget {
           final users = snap.data ?? const <User>[];
           if (users.isEmpty) return const Center(child: Text('No users found'));
 
+          // Display list of users
           return ListView.separated(
             itemCount: users.length,
             separatorBuilder: (_, __) => const Divider(height: 1),

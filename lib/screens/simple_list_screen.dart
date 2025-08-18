@@ -6,6 +6,7 @@ class SimpleListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Generate a simple list of items
     final items = List.generate(10, (i) => 'Item ${i + 1}');
     return Scaffold(
       appBar: AppBar(title: const Text('Simple List')),
@@ -20,6 +21,7 @@ class SimpleListScreen extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w600)),
             subtitle: Text('Subtitle for $title'),
             onTap: () {
+              // Show a snackbar with the item title when tapped
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(title)));
             },

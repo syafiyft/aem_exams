@@ -3,18 +3,22 @@ import 'screens/simple_list_screen.dart';
 import 'screens/login_form_screen.dart';
 import 'screens/users_screen.dart';
 
+// Entry point of the app
 void main() => runApp(const MyApp());
 
+// Main app widget, sets up theme and navigation
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // App title and theme
       title: 'Section 2 — Coding Tasks',
       theme: ThemeData(
           useMaterial3: true, colorSchemeSeed: const Color(0xFF01A99D)),
-      home: const HomeScreen(),
+      home: const HomeScreen(), // Default screen
       routes: {
+        // Named routes for navigation
         SimpleListScreen.route: (_) => const SimpleListScreen(),
         LoginFormScreen.route: (_) => const LoginFormScreen(),
         UsersScreen.route: (_) => const UsersScreen(),
@@ -23,6 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Home screen with navigation cards
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
@@ -32,6 +37,7 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: const [
+          // Navigation cards for each task
           _NavCard(
               title: 'Task 6: Simple List (SnackBar)',
               route: SimpleListScreen.route),
@@ -47,14 +53,16 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// Card widget for navigation
 class _NavCard extends StatelessWidget {
   final String title;
   final String route;
-  const _NavCard({required this.title, required this.route, super.key});
+  const _NavCard({required this.title, required this.route}); // removed super.key
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        // Tapping navigates to the selected route
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => Navigator.pushNamed(context, route),
@@ -62,3 +70,4 @@ class _NavCard extends StatelessWidget {
     );
   }
 }
+// End of main.dart
