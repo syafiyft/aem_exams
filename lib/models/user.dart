@@ -1,10 +1,18 @@
-// User model representing a user entity
+// User model represents a person from the API
 class User {
-  final String name;
-  final String email;
-  const User({required this.name, required this.email});
+  final int id; // User's unique ID
+  final String name; // User's name
+  final String email; // User's email address
+  const User(
+      {required this.id,
+      required this.name,
+      required this.email}); // Constructor for User
 
-  // Factory constructor for creating a User from JSON
-  factory User.fromJson(Map<String, dynamic> j) =>
-      User(name: j['name'] as String, email: j['email'] as String);
+  factory User.fromJson(
+          Map<String, dynamic>
+              j) => // Factory constructor to create a User from JSON
+      User(
+          id: j['id'] as int,
+          name: j['name'] as String,
+          email: j['email'] as String);
 }

@@ -1,29 +1,40 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // Import Flutter's material design library
 
 class SimpleListScreen extends StatelessWidget {
-  static const route = '/list';
-  const SimpleListScreen({super.key});
+  // This screen shows a simple list
+  static const route = '/list'; // Route name for navigation
+  const SimpleListScreen({super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
-    // Generate a simple list of items
-    final items = List.generate(10, (i) => 'Item ${i + 1}');
+    // Build method describes the UI
+    final items = List.generate(
+        10,
+        (i) =>
+            'Item ${i + 1}'); // Make a list of 10 items, like 'Item 1', 'Item 2', ...
     return Scaffold(
-      appBar: AppBar(title: const Text('Simple List')),
+      // Scaffold provides the basic visual layout structure
+      appBar: AppBar(
+          title: const Text('Simple List')), // The top bar with the title.
       body: ListView.builder(
-        itemCount: items.length,
+        // ListView.builder efficiently builds list items
+        itemCount: items.length, // Tell the list how many items we have.
         itemBuilder: (context, index) {
-          final title = items[index];
+          // Builds each row in the list
+          final title = items[index]; // Get the name for this row.
           return ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16, vertical: 8), // Add space around each row.
             title: Text(title,
-                style: const TextStyle(fontWeight: FontWeight.w600)),
-            subtitle: Text('Subtitle for $title'),
+                style: const TextStyle(
+                    fontWeight:
+                        FontWeight.w600)), // Show the item name in bold.
+            subtitle: Text(
+                'Subtitle for $title'), // Show a smaller subtitle under the name.
             onTap: () {
-              // Show a snackbar with the item title when tapped
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(title)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(
+                      title))); // When you tap, show a message at the bottom with the item name.
             },
           );
         },
